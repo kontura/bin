@@ -1,0 +1,13 @@
+#!/bin/sh
+
+var=0
+while :
+do
+  $(wmv -a $(wmp) $(pfw))
+  var=$((var+1))
+  sleep 0.01
+  if (( var > 150 ))
+  then
+    exit 1
+  fi
+done

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+duratrion=3
+
+barx=10
+bary=10
+barw=120
+barh=20
+
+
+barBg='#ff333333'
+barFG='#ffffffff'
+
+baropt='-g ${barw}x${barh}+${barx}+${bary} -B${barBg}'
+
+(echo " $@"; sleep ${duratrion}) | lemonbar ${baropt}

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+xrdb -override ~/usr/dotfiles/colors/$1.colors
+cd ~/usr/pictures/wallpapers
+wall=$(find . -name "*$1*")
+hsetroot -fill ~/usr/pictures/wallpapers/$wall

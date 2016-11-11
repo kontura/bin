@@ -1,0 +1,1 @@
+barmk.sh | drawBar.sh &
