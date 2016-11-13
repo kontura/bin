@@ -8,4 +8,4 @@ ROOT=$(lsw -r)
 SW=$(wattr w $ROOT)
 SH=$(wattr h $ROOT)
 
-#wtp $(((SW - WW)/2)) $(((SH - WH)/2)) $WW $WH $WID
+wtp $(((SW - WW)/2)) $(((SH - WH)/2)) $WW $WH $WID

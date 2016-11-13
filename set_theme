@@ -1,7 +1,22 @@
 #!/bin/bash
 
+list() {
+  echo "$(ls ~/usr/dotfiles/colors)"
+    exit 1
+}
+
+# exit if no argument given
+test -z "$1" && list
 
 xrdb -override ~/usr/dotfiles/colors/$1.colors
 cd ~/usr/pictures/wallpapers
 wall=$(find . -name "*$1*")
 hsetroot -fill ~/usr/pictures/wallpapers/$wall
+
+bg=$(xrdb -query | grep background | awk '{print $NF}')
+
+bf=$(xrdb -query | grep foreground | awk '{print $NF}')
+
+printf "\033]10;$fg\007"
+printf "\033]11;$bg\007"
+printf "\033]708;$bg\007"

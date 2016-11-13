@@ -1,16 +1,23 @@
 #!/bin/sh
 
-duratrion=3
-
-barx=10
-bary=10
-barw=120
-barh=20
+duratrion=9
 
 
-barBg='#ff333333'
-barFG='#ffffffff'
+text=$@
+width=$((${#text} * 10))
+echo $width
 
-baropt='-g ${barw}x${barh}+${barx}+${bary} -B${barBg}'
+ROOT=$(lsw -r)
+SW=$(wattr w $ROOT)
+SH=$(wattr h $ROOT)
+barx=$((SW-width-50))
+bary=50
+barw=200
+barh=100
 
-(echo " $@"; sleep ${duratrion}) | lemonbar ${baropt}
+bg=$(xrdb -query | grep background | awk '{print $NF}')
+fg=$(xrdb -query | grep foreground | awk '{print $NF}')
+
+baropt="-d -g ${width}x${barh}+${barx}+${bary} -B${bg} -F${fg}"
+
+(echo "%{c} $@"; sleep ${duratrion}) | lemonbar ${baropt}
