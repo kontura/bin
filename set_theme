@@ -11,11 +11,36 @@ test -z "$1" && list
 xrdb -override ~/usr/dotfiles/colors/$1.colors
 cd ~/usr/pictures/wallpapers
 wall=$(find . -name "*$1*")
-hsetroot -fill ~/usr/pictures/wallpapers/$wall
+hsetroot -center  ~/usr/pictures/wallpapers/$wall
+
 
 bg=$(xrdb -query | grep background | awk '{print $NF}')
 
-bf=$(xrdb -query | grep foreground | awk '{print $NF}')
+fg=$(xrdb -query | grep foreground | awk '{print $NF}')
+
+border_w=$(xrdb -query | grep Window.border | awk '{print $NF}')
+border_active=$(xrdb -query | grep Window.active | awk '{print $NF}')
+border_inactive=$(xrdb -query | grep Window.inactive | awk '{print $NF}')
+conky_clock=$(xrdb -query | grep Conky.clock | sed -r "s/^[^:]*?\://")
+
+if [ -n "$conky_clock" ]; then
+  sed -i -e "s/\${font\ [^}]*}/$\{font\ $conky_clock\}/g" ~/.conkyrc
+fi
+
+if [ -n "$border_w" ]; then
+  sed -i -e "s/BW\:\-./BW\:\-$border_w/g" ~/bin/focus.sh
+fi
+
+if [ -n "$border_active" ]; then
+sed -i -e "s/ACTIVE\:\-0x....../ACTIVE\:\-0x$border_active/g" ~/bin/focus.sh
+fi
+
+if [ -n "$border_inactive" ]; then
+sed -i -e "s/INACTIVE\:\-0x....../INACTIVE\:\-0x$border_inactive/g" ~/bin/focus.sh
+fi
+
+sed -i -e "s/--fg-dark\:\ #......\;/--fg-dark: $fg;/g" ~/.mozilla/firefox/efnhjymc.default/stylish.sqlite
+sed -i -e "s/--bg-dark\:\ #......\;/--bg-dark: $bg;/g" ~/.mozilla/firefox/efnhjymc.default/stylish.sqlite
 
 printf "\033]10;$fg\007"
 printf "\033]11;$bg\007"
