@@ -13,6 +13,7 @@ cd ~/usr/pictures/wallpapers
 wall=$(find . -name "*$1*")
 hsetroot -center  ~/usr/pictures/wallpapers/$wall
 
+pkill compton
 
 bg=$(xrdb -query | grep background | awk '{print $NF}')
 
@@ -22,6 +23,14 @@ border_w=$(xrdb -query | grep Window.border | awk '{print $NF}')
 border_active=$(xrdb -query | grep Window.active | awk '{print $NF}')
 border_inactive=$(xrdb -query | grep Window.inactive | awk '{print $NF}')
 conky_clock=$(xrdb -query | grep Conky.clock | sed -r "s/^[^:]*?\://")
+conky_clock_color=$(xrdb -query | grep Conky.color | sed -r "s/^[^:]*?\://")
+to_exec=$(xrdb -query | grep exec | sed -r "s/^[^:]*?\://")
+
+$to_exec
+
+if [ -n "$conky_clock_color" ]; then
+  sed -i -e "s/color1\t....../color1$conky_clock_color/g" ~/.conkyrc
+fi
 
 if [ -n "$conky_clock" ]; then
   sed -i -e "s/\${font\ [^}]*}/$\{font\ $conky_clock\}/g" ~/.conkyrc

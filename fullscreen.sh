@@ -5,7 +5,7 @@
 # depends on: focus.sh
 
 # this file is used to store the previous geometry of a window
-FSFILE=${FSFILE:-~/.fwin}
+FSFILE=${FSFILE:-/tmp/geometry_$1}
 
 # it's pretty simple, but anyway...
 usage() {
@@ -19,13 +19,14 @@ test -z "$1" && usage
 # this will unset the fullscreen state of any fullscreen window if there is one.
 # this way, there will only be one window in fullscreen at a time, and no window
 # will loose their previous geometry info
-test -f $FSFILE && wtp $(cat $FSFILE)
+#test -f $FSFILE && wtp $(cat $FSFILE)
 
 # if file exist and contain our window id, it means that our window is in
 # fullscreen mode
 if test -f $FSFILE && grep -q $1 $FSFILE; then
     # if the window we removed was our window, delete the file, so we can
     # fullscreen it again later 
+    wtp $(cat $FSFILE)
     rm -f $FSFILE
 
 else
