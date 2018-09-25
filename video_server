@@ -1,0 +1,2 @@
+sudo systemctl start smb.service
+sudo systemctl start nmb.service

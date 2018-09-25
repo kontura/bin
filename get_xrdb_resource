@@ -1,0 +1,2 @@
+var=$(xrdb -query | grep "$1" | sed -r "s/^[^:]*?\://")
+echo $var

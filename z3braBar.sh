@@ -58,7 +58,7 @@ while :; do
     buf="${buf} %{cF#fff}"
     buf="${buf} $(clock)"
     buf="${buf} %{r}"
-    buf="${buf} %{F${h}}NET: %{F#fff}$(network)"
+    buf="${buf} %{F${h}}NET:%{F#fff}$(network)"
     buf="${buf} %{F${h}}CPU: %{F#fff}$(cpuload)%"
     buf="${buf} %{l}"
     buf="${buf} %{F${h}}VOL:%{F#fff} $(volume)"

@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+mplayer -volume 20 ~/Downloads/music/mass_effect_galaxy_map_theme.mp3 &
+revert() {
+  xset dpms 0 0 0
+}
+trap revert HUP INT TERM
+xset +dpms dpms 100 100 100
+i3lock -n -i $HOME/usr/pictures/wallpapers/mass_effect_lock.png \
+         --insidecolor=37344500 --ringcolor=d23c3d44 --line-uses-inside \
+         --keyhlcolor=d23c3d77 --bshlcolor=d23c3d77 --separatorcolor=00000000 \
+         --insidevercolor=ffffff00 --insidewrongcolor=d23c3d00 \
+         --ringvercolor=99999966 --ringwrongcolor=d23c3dbb --indpos="x+960:y+600" \
+         --radius=340 --veriftext="" --wrongtext="" --ring-width=10 \
+         -k --indicator --timecolor=33333366 --datecolor=33333366 -t -S=0 \
+         --timepos="ix-40:iy-160"
+         revert

@@ -1,35 +1,38 @@
 #!/bin/bash
 
 list() {
-  echo "$(ls ~/usr/dotfiles/colors)"
+  echo "$(ls ~/usr/dotfiles/themes)"
     exit 1
+}
+
+get_xrdb_resource(){
+  var=$(xrdb -query | grep "$1" | sed -r "s/^[^:]*?\://")
+  echo $var
 }
 
 # exit if no argument given
 test -z "$1" && list
 
-xrdb -override ~/usr/dotfiles/colors/$1.colors
-cd ~/usr/pictures/wallpapers
-wall=$(find . -name "*$1*")
-hsetroot -center  ~/usr/pictures/wallpapers/$wall
+xrdb -override ~/usr/dotfiles/themes/$1
 
 pkill compton
+pkill conky
 
-bg=$(xrdb -query | grep background | awk '{print $NF}')
+bg=$(get_xrdb_resource "background")
+fg=$(get_xrdb_resource "foreground")
+border_w=$(get_xrdb_resource "Window.border")
+border_active=$(get_xrdb_resource "Window.active")
+border_inactive=$(get_xrdb_resource "Window.inactive")
+conky_clock=$(get_xrdb_resource "Conky.clock")
+conky_clock_color=$(get_xrdb_resource "Conky.color")
+to_exec=$(get_xrdb_resource "exec")
+background=$(get_xrdb_resource "bg.picture")
+background_setting=$(get_xrdb_resource "bg.setting")
 
-fg=$(xrdb -query | grep foreground | awk '{print $NF}')
-
-border_w=$(xrdb -query | grep Window.border | awk '{print $NF}')
-border_active=$(xrdb -query | grep Window.active | awk '{print $NF}')
-border_inactive=$(xrdb -query | grep Window.inactive | awk '{print $NF}')
-conky_clock=$(xrdb -query | grep Conky.clock | sed -r "s/^[^:]*?\://")
-conky_clock_color=$(xrdb -query | grep Conky.color | sed -r "s/^[^:]*?\://")
-to_exec=$(xrdb -query | grep exec | sed -r "s/^[^:]*?\://")
-
-$to_exec
+hsetroot $background_setting $background
 
 if [ -n "$conky_clock_color" ]; then
-  sed -i -e "s/color1\t....../color1$conky_clock_color/g" ~/.conkyrc
+  sed -i -e "s/default_color='#......'/default_color='#$conky_clock_color'/g" ~/.conky/.conkyrc
 fi
 
 if [ -n "$conky_clock" ]; then
@@ -48,8 +51,10 @@ if [ -n "$border_inactive" ]; then
 sed -i -e "s/INACTIVE\:\-0x....../INACTIVE\:\-0x$border_inactive/g" ~/bin/focus.sh
 fi
 
-sed -i -e "s/--fg-dark\:\ #......\;/--fg-dark: $fg;/g" ~/.mozilla/firefox/efnhjymc.default/stylish.sqlite
-sed -i -e "s/--bg-dark\:\ #......\;/--bg-dark: $bg;/g" ~/.mozilla/firefox/efnhjymc.default/stylish.sqlite
+if [ -n "$to_exec" ]; then
+  echo $to_exec
+  eval "$to_exec"
+fi
 
 printf "\033]10;$fg\007"
 printf "\033]11;$bg\007"

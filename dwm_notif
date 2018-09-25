@@ -1,0 +1,8 @@
+while true; do
+#time in this format Monday March 14 08:57:52
+CLK=$( date +'%a %b %d %R' )
+#volume in %
+VOL=$( amixer get Master | tail -1 | awk '{ print $5}' | tr -d '[]' )
+xsetroot -name "Vol: $VOL | $CLK"
+sleep 1
+done

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-duratrion=9
+duratrion=4
 
 
 text=$@

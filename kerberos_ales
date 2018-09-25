@@ -1,0 +1,1 @@
+sudo mount.cifs -vvv //10.0.0.8/ales mnt/usb/ -o vers=1.0 user=ales

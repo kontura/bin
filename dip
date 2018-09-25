@@ -1,0 +1,3 @@
+cd /home/alex/usr/school/DIP/text
+wendy -m 2 projekt-01-kapitoly-chapters.tex make &
+/home/alex/bin/st-text

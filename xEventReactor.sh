@@ -3,7 +3,7 @@
 while IFS=: read ev wid; do
     case $ev in
         # window creation: center window on the screen (except docks, menus or similar)
-        16) wattr o $wid || center.sh $wid ;;
+        16) wattr o $wid || center.sh $wid && bspc node -t floating ;;
 
         # mapping requests: just set a special border for docks, menus and
         # similar. Focus other windows

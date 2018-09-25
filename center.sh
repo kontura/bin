@@ -4,8 +4,14 @@ WID=$1
 WW=$(wattr w $WID)
 WH=$(wattr h $WID)
 
+WW=$(($WW/40*40-1))
+WH=$(($WH/40*40-1))
+
 ROOT=$(lsw -r)
 SW=$(wattr w $ROOT)
 SH=$(wattr h $ROOT)
 
-wtp $(((SW - WW)/2)) $(((SH - WH)/2)) $WW $WH $WID
+centerX=$(((SW - WW)/80*40+1))
+centerY=$(((SH - WH)/80*40+1))
+
+wtp  $centerX $centerY $WW $WH $WID

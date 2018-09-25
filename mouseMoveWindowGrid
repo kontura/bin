@@ -1,0 +1,34 @@
+#!/bin/sh
+
+var=0
+
+windows_size=$(wattr wh $(pfw))
+echo $windows_size
+windows_size_array=(`echo $windows_size | tr ' ' '\n'`)
+width=$((windows_size_array[0]))
+height=$((windows_size_array[1]))
+
+
+while :
+do
+  #incorporate window size correction
+  mousePosition=$(wmp)
+  mousePositionArray=(`echo $mousePosition | tr ' ' '\n'`)
+  x=$((((mousePositionArray[0]))/40*40))
+  y=$((((mousePositionArray[1]))/40*40))
+  #$(wmv -a $x $y $(pfw))
+  $(wtp $x $y $width $height $(pfw))
+  echo ${height}
+  #$(wmp -a $x $y )
+
+
+
+
+  var=$((var+1))
+  sleep 0.01
+
+  if (( var > 350 ))
+  then
+    exit 1
+  fi
+done

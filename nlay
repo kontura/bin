@@ -1,0 +1,111 @@
+#!/bin/bash
+
+# #############################################################################
+# nlay: a customizable script to play files in different apps by file type
+#
+# usage: nlay file type
+#
+# MUST READ:
+#
+# 1. Feel free to change the default apps to your favourite ones.
+#    If you change the app for a group you may also need to modify the opts and
+#    bg settings. If bg is set the app is detached and started in the background
+#    in silent mode.
+#
+#    The bg setting depends on personal preference and type of app, e.g.,
+#    I would start vim (CLI) in the foreground but Sublime Text (GUI) in the
+#    background.
+#
+#    Check (and TOGGLE as you wish) the default bg settings.
+#
+# 2. Detached apps are not killed when nnn exits. Use kill(1) or killall(1) to
+#    to stop console based background apps.
+#
+# 3. nlay is OVERWRITTEN during nnn upgrade. You can store your custom nlay in a
+#    location other than the default and have an alias with nnn option '-p' to
+#    invoke it. Remember it might break or lack new capabilities added to nlay
+#    in future releases. Check the file diff once in a while.
+#
+# Author: Arun Prakash Jana
+# Email: engineerarun@gmail.com
+# Homepage: https://github.com/jarun
+# Copyright © 2016-2017 Arun Prakash Jana
+# #############################################################################
+
+
+# Enable the lines below to handle file by extension
+# This is provided for using a custom player for specific files
+# $ext holds the extension
+fname=$(basename "$1")
+if [[ $fname != *"."* ]]; then
+    exit 1
+fi
+
+ext="${fname##*.}"
+if [ -z "$ext" ]; then
+    exit 1
+fi
+
+# bash 4.0 way to switch to lowercase
+ext="${ext,,}"
+
+# handle this extension and exit
+
+echo $2 >> nlay_log
+
+#------------ PLAINTEXT (UNUSED) ------------
+if [ "$2" == "text" ]; then
+    app=("vim")
+
+    opts=("")
+
+    bg=("")
+
+#----------------- SEARCH -------------------
+elif [ "$2" == "search" ]; then
+    app=("gnome-search-tool"
+         "catfish")
+
+    opts=("--path"
+          "--path")
+
+    bg=(">/dev/null 2>&1 &"
+        ">/dev/null 2>&1 &")
+
+#----------------- PDF -------------------
+elif [ "$2" == "pdf" ]; then
+    app=("zathura")
+
+    opts=("")
+
+    bg=(">/dev/null 2>&1 &"
+        ">/dev/null 2>&1 &")
+
+elif [ "$2" == "png" ]; then
+    app=("meh")
+
+    opts=("")
+
+    bg=(">/dev/null 2>&1 &"
+        ">/dev/null 2>&1 &")
+
+#--------------- SCREENSAVER ----------------
+elif [ "$2" == "screensaver" ]; then
+    app=vlock
+
+    #opts=
+
+    #bg=">/dev/null 2>&1 &"
+
+    type -P $app &>/dev/null &&
+    eval $app $opts $bg
+    exit 0
+fi
+
+#----------------- RUN APP ------------------
+for index in ${!app[@]}
+do
+    type -P ${app[$index]} &>/dev/null &&
+    eval ${app[$index]} ${opts[$index]} "\"$1\"" ${bg[$index]} &&
+    break
+done

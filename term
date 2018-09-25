@@ -1,0 +1,5 @@
+#home/alex/src/st-scrollback-git/src/st_blue/st -e $1
+/home/alex/src/st-scrollback-git/src/st/st -e $1
+#st
+#urxvt -b 20
+#urxvt -pixmap "/home/alex/usr/pictures/wallpapers/repeat/twinkle_twinkle.png; style=tiled" -b 25

@@ -1,0 +1,14 @@
+if test "$#" -eq 1; 
+then
+  convert $1 -resize x1200 resized1.jpg
+  convert $1 -resize x900 resized2.jpg
+else
+  convert $1 -resize x1200 resized1.jpg
+  convert $2 -resize x900 resized2.jpg
+fi
+convert resized2.jpg -background skyblue -gravity center -extent 1812x900 resized2.jpg
+convert resized1.jpg resized2.jpg -append output.jpg
+hsetroot -center output.jpg
+#rm output.jpg
+rm resized1.jpg
+rm resized2.jpg

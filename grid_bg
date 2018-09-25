@@ -1,0 +1,9 @@
+convert $1 -resize 1920x1080 resized1.png
+convert usr/pictures/wallpapers/grid.png -resize 1920x1080 resized2.png
+
+composite -dissolve 100 resized2.png resized1.png -alpha Set output.jpg
+
+hsetroot -center output.jpg
+rm output.jpg
+rm resized1.png
+rm resized2.png

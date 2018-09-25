@@ -1,0 +1,4 @@
+wget  https://source.unsplash.com/random/1920x1080  -O /tmp/pic.jpg
+grid_bg /tmp/pic.jpg
+magick convert /tmp/pic.jpg /tmp/pic.png
+colors -n 16 /tmp/pic.png |  toXrdb.sh | xrdb -merge

@@ -1,2 +1,1 @@
-
-urxvt -pixmap $1 -override-redirect -geometry 273x83 -e cava
+urxvt -pixmap $1 -borderColor black -w 0 -e cava
