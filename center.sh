@@ -9,6 +9,7 @@ WH=$(($WH/40*40-1))
 
 ROOT=$(lsw -r)
 SW=$(wattr w $ROOT)
+SW=1920
 SH=$(wattr h $ROOT)
 
 centerX=$(((SW - WW)/80*40+1))

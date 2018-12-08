@@ -15,6 +15,6 @@ while IFS=: read ev wid; do
         18) wattr $(pfw) || focus.sh prev 2>/dev/null;;
 
         # Focus windows when the mouse cursor enter them
-        #7) wattr o $wid || focus.sh $wid ;;
+        7) wattr o $wid || focus.sh $wid ;;
     esac
 done
