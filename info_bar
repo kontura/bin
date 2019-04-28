@@ -1,0 +1,7 @@
+notify-send -u low -a info_bar "<span font='27' font_weight='bold' color='white'>$(date +%T)</span>" "
+<span font='12' color='#b8b8b8' font_weight='bold'>$(/usr/bin/date +%F)</span>
+
+$(acpi -b | sed 's/Battery 0: //g' | sed 's/00/<br>/g')
+
+$(cat ~/Usr/TODO)
+"
