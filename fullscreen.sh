@@ -20,7 +20,7 @@ mon1=$(xrandr --current | grep " connected" | egrep -o '[0-9]+x[0-9]+\+[0-9]+\+[
 mon2=$(xrandr --current | grep " connected" | egrep -o '[0-9]+x[0-9]+\+[0-9]+\+[0-9]+' | sed 's/+/x/g' | head -1)
 IFS='x' read -a mon1_array <<< "$mon1"
 IFS='x' read -a mon2_array <<< "$mon2"
-mon1_full_dims="$((${mon1_array[2]} -1)) $((${mon1_array[3]} - 1)) ${mon1_array[0]} ${mon1_array[1]}"
+mon1_full_dims="$((${mon1_array[2]})) $((${mon1_array[3]})) ${mon1_array[0]} ${mon1_array[1]}"
 mon2_full_dims="${mon2_array[2]} ${mon2_array[3]} ${mon2_array[0]} ${mon2_array[1]}"
 
 # this will unset the fullscreen state of any fullscreen window if there is one.

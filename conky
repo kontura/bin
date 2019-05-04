@@ -1,4 +1,0 @@
-conky -c .config/conky/geddy/geddy.conkyrc 
-#c=$(xwininfo -name "conky (Arawn)" | grep id: | grep -P -o "0x.*?[\ ]")
-#ignw -s $c
-#$(chwb -s 0 $c)

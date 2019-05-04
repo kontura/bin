@@ -1,1 +1,0 @@
-cat /home/alex/src/unicode_select/handmade | rofi -dmenu -i | echo -en \\u`awk '{print $1}'` | xclip -selection c

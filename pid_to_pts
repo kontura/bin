@@ -1,7 +1,0 @@
-a=$(ps ax | grep -E -A 1 "^\s*$1.*urxvt")
-if [ -n "{$a}" ]; then
-  out=$(echo "$a"|grep pts)
-  echo $out | awk '{print $2}' | awk -F'/' '{print $2}'
-fi
-
-

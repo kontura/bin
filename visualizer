@@ -1,1 +1,0 @@
-urxvt -pixmap $1 -borderColor black -w 0 -e cava
