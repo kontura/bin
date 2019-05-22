@@ -1,0 +1,30 @@
+#!/bin/sh
+
+root_w=1260 
+root_h=940 
+root_x=590 
+root_y=70
+
+w_count=`lsw | wc -l`
+x_delta=700/$w_count
+
+chwso -l $(pfw)
+root_id=`lsw | tac | head -n 1`
+
+wtp $root_x $root_y $root_w $root_h $root_id
+
+root_x=$((root_x - $x_delta))
+root_y=$((root_y + 100))
+root_h=$((root_h - 200))
+root_w=$((root_w - 200))
+
+lsw | tac | awk 'NR != 1' | while read p; do
+    wtp $root_x $root_y $root_w $root_h $p
+    root_x=$((root_x - $x_delta))
+    root_y=$((root_y + 100))
+    root_h=$((root_h - 200))
+    root_w=$((root_w - 200))
+    chwb -s 0 -c 0xffffff $p
+done
+
+wtf $root_id
