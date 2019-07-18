@@ -1,0 +1,1 @@
+git cherry-pick $(git cherry -v $(git branch | grep \* | cut -d ' ' -f2) $1 | column -s ';' -t | dmenu -w $(pfw) -i -l 30 | awk '{print $2}')

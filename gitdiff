@@ -1,1 +1,1 @@
-git d $(git log --pretty=format:"%s ; %an ; %ar ; %H" | column -s ';' -t | dmenu -w $(pfw) -i -l 30 | awk '{print $NF}' | xargs)
+git d $(git log --pretty=format:"%<(60,trunc)%s ; %an ; %ar ; %H" | column -s ';' -t | dmenu -w $(pfw) -i -l 30 | awk '{print $NF}' | xargs)
