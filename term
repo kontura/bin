@@ -1,5 +1,5 @@
 #home/alex/src/st-scrollback-git/src/st_blue/st -e $1
 ##/home/alex/src/st-scrollback-git/src/st/st -e $1
-/home/amatej/src/st/st
+/home/amatej/src/st/st -b $(shuf -n 1 ~/Usr/bin/st_bgs) 
 #/home/amatej/src/st-scrollback-git/st-dawn/st
 #/home/amatej/src/st-scrollback-git/st-red/st
