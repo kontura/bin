@@ -1,0 +1,2 @@
+value=`sed ':a;N;$!ba;s/\n/\\\n/g' ~/usr/todo`
+echo {\"text\": \"$value\"}
