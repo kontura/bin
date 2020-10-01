@@ -5,7 +5,7 @@ then
 fi
 mkdir build
 cd build
-cmake .. $@
+cmake .. -DCMAKE_BUILD_TYPE=Debug $@
 make -j5
 if [ $? -ne 0 ]
 then

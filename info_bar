@@ -1,7 +1,10 @@
-notify-send -u low -a info_bar "<span font='27' font_weight='bold' color='white'>$(date +%T)</span>" "
-<span font='12' color='#b8b8b8' font_weight='bold'>$(/usr/bin/date +%F)</span>
 
-$(acpi -b | sed 's/Battery 0: //g' | sed 's/00/<br>/g')
+pkill mako
+mako --anchor center --layer overlay
 
-$(cat ~/Usr/TODO)
-"
+# id=`ps -u amatej | grep waybar`
+#
+#[ -z "$id" ] && exec waybar &
+
+exec killall -SIGUSR1 waybar
+

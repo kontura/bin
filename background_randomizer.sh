@@ -1,9 +1,16 @@
 #!/bin/bash
 
+if [ -z "$1" ]
+then
+    files=(~/Pictures/*/*)
+    pic="${files[RANDOM % ${#files[@]}]}"
+else
+    pic="$1"
+fi
+
+
 #files=(~/usr/pictures/wallpapers/desaturated/*.*)
 #files=(~/usr/pictures/wallpapers/wide/*)
-files=(~/usr/pictures/wallpapers/*)
-pic="${files[RANDOM % ${#files[@]}]}"
 #colors -en 32 ${pic} | sed '9,24p;d' | toXrdb.sh | shuf | xrdb -override
 #W=`identify ${pic} | cut -f 3 -d " " | sed s/x.*//` #width
 #H=`identify ${pic} | cut -f 3 -d " " | sed s/.*x//` #height
@@ -11,7 +18,8 @@ pic="${files[RANDOM % ${#files[@]}]}"
 #if [ "$W" -gt "1920" ]; then
 #  hsetroot -tile  ${pic}
 #else
-  hsetroot -fill  ${pic}
+pkill swaybg
+  swaybg -i ${pic} &
 #fi
 
 
