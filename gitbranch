@@ -1,1 +1,0 @@
-git checkout $(git branch | dmenu -w $(pfw) -i -l 30)

@@ -1,0 +1,12 @@
+echo
+echo "Defautl:"
+b -DPYTHON_DESIRED=/usr/bin/python3.8 2>&1 | tail
+#b -DPYTHON_DESIRED=/usr/bin/python2.7 2>&1 | tail
+echo
+echo "-DWITH_LIBMODULEMD=OFF:"
+b -DPYTHON_DESIRED=/usr/bin/python3.8 -DWITH_LIBMODULEMD=OFF 2>&1 | tail
+#b -DPYTHON_DESIRED=/usr/bin/python2.7 -DWITH_LIBMODULEMD=OFF 2>&1 | tail
+echo
+echo "-DWITH_ZCHUNK=OFF:"
+b -DPYTHON_DESIRED=/usr/bin/python3.8 -DWITH_ZCHUNK=OFF 2>&1 | tail
+#b -DPYTHON_DESIRED=/usr/bin/python2.7 -DWITH_ZCHUNK=OFF 2>&1 | tail

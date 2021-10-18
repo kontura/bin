@@ -1,1 +1,0 @@
-sudo mount.cifs -vvv //10.0.0.8/Public /mnt/kerberos/ -o vers=1.0

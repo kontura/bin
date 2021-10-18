@@ -1,1 +1,0 @@
-git add $(git status | sed 's/\t/\ \ \ \ \ \ /g' | dmenu -i -l 30 -w $(pfw) | awk '{print $NF}' | xargs)

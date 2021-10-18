@@ -19,7 +19,9 @@ fi
 #  hsetroot -tile  ${pic}
 #else
 pkill swaybg
-  swaybg -i ${pic} &
+swaybg -i ${pic} &
+sleep 1s
+/home/amatej/usr/src/notesbg/build/swaybg --image /home/amatej/usr/todo --mode left &
 #fi
 
 
